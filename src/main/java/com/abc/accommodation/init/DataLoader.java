@@ -33,9 +33,9 @@ public class DataLoader implements CommandLineRunner {
         postRepository.save(post);
         post = new Post("Thuê nhà giá siêu ưu đãi","Quận 11, TPHCM",800000.0,"0993468321","https://luattrinam.vn/uploads/img/tu-van-hop-dong/Dang%20ky%20kinh%20doanh%20cho%20thue%20nha%20tro.jpg");
         postRepository.save(post);
-        post = new Post("Cho thuê nhà quận 6","Quận 6, TPHCM",700000.0,"0993325321");
+        post = new Post("Cho thuê nhà quận 6","Quận 6, TPHCM",3500000.0,"0993325321","https://image.sggp.org.vn/w580/Uploaded/2020/dureidrkxq/2019_02_24/x8e_ekrf.jpg");
         postRepository.save(post);
-        post = new Post("Cho thuê nhà, ưu đãi với sinh viên","Quận 9, TPHCM",520000.0,"0965465321");
+        post = new Post("Cho thuê nhà, ưu đãi với sinh viên","Quận 9, TPHCM",520000.0,"0965465321","https://tinhaynhadat.com/media/14572/20180929225813-8ae7.jpeg");
         postRepository.save(post);
 
     }
