@@ -2,6 +2,9 @@ package com.abc.accommodation.model;
 
 import com.abc.accommodation.request.CreatePostRequest;
 import com.abc.accommodation.request.EditPostRequest;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,13 +25,19 @@ public class Post implements Serializable {
     private String phone;
     private String imageURL;
 
+    @ManyToOne(optional = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "username")
+    @JsonIdentityReference(alwaysAsId = true)
+    private User user;
 
-    public Post(String title, String location, Double price, String phone, String imageURL) {
+    public Post(String title, String location, Double price, String phone, String imageURL, User user) {
         this.title = title;
         this.location = location;
         this.price = price;
         this.phone = phone;
         this.imageURL = imageURL;
+        this.user = user;
     }
 
     public Post(CreatePostRequest request){
