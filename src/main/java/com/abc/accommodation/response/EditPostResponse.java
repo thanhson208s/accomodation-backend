@@ -13,6 +13,7 @@ public class EditPostResponse {
     private Double price;
     private String phone;
     private String imageURL;
+    private String description;
 
     public EditPostResponse(Post post) {
         this.id = post.getId();
@@ -21,5 +22,6 @@ public class EditPostResponse {
         this.price = post.getPrice();
         this.phone = post.getPhone();
         this.imageURL = post.getImageURL();
+        this.description = post.getDescription();
     }
 }

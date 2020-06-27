@@ -1,11 +1,16 @@
 package com.abc.accommodation.model;
 
 import com.abc.accommodation.request.SignUpRequest;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "_user")
 @NoArgsConstructor
@@ -25,6 +30,12 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Post> posts = new ArrayList<>();
 
     public User(String username, String password, String phone){
         this.username = username;

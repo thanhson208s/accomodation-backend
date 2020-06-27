@@ -11,12 +11,14 @@ public class CreatePostRequest {
     private Double price;
     private String phone;
     private String imageURL;
+    private String description;
 
-    public CreatePostRequest(String title, String location, Double price, String phone, String imageURL) {
+    public CreatePostRequest(String title, String location, Double price, String phone, String imageURL, String description) {
         this.title = title;
         this.location = location;
         this.price = price;
         this.phone = phone;
         this.imageURL = imageURL;
+        this.description = description;
     }
 }
