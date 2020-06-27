@@ -19,7 +19,7 @@ public class UserDetailService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user =
-                userRepository.findByPhone(s).orElseThrow(() -> new UsernameNotFoundException(
+                userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(
                         "User not found  with phone: " + s));
         return new UserPrincipal(user.getId(), user.getUsername(), user.getPassword(), user.getPhone());
     }
