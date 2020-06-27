@@ -24,6 +24,7 @@ public class Post implements Serializable {
     private Double price;
     private String phone;
     private String imageURL;
+    private String description;
 
     @ManyToOne(optional = false)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
