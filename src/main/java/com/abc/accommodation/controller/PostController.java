@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,6 +28,15 @@ public class PostController {
     public List<Post> getPosts() {
         System.out.println("OK\n");
         return postRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getPost(@PathVariable Long id){
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            return ResponseEntity.ok(post.get());
+        }
+        else return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/create")
@@ -45,6 +55,7 @@ public class PostController {
             post.get().setLocation(request.getLocation());
             post.get().setPrice(request.getPrice());
             post.get().setPhone(request.getPhone());
+            post.get().setImageURL(request.getImageURL());
 
             postRepository.save(post.get());
             EditPostResponse response = new EditPostResponse(post.get());

@@ -38,18 +38,17 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponse> signUp(@Valid @RequestBody SignUpRequest request){
-        System.out.println("OK");
         if (userRepository.existsByPhone(request.getPhone()))
             return new ResponseEntity(new SignUpResponse(false, "Phone is already used!"), HttpStatus.BAD_REQUEST);
+        if (userRepository.existsByUsername(request.getUsername()))
+            return new ResponseEntity(new SignUpResponse(false, "Username is already taken!"), HttpStatus.BAD_REQUEST);
         User user = new User(request);
-        System.out.println("OK1");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("OK2");
         user = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{phone}")
-                .buildAndExpand(user.getPhone()).toUri();
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(user.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new SignUpResponse(true, "User registered successfully"));
     }
@@ -58,14 +57,14 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getPhone(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
-        userRepository.findByPhone(request.getPhone()).ifPresent(user -> {
+        userRepository.findByUsername(request.getUsername()).ifPresent(user -> {
             user.setJwt(jwt);
             userRepository.save(user);
         });

@@ -20,14 +20,15 @@ public class Post implements Serializable {
     private String location;
     private Double price;
     private String phone;
-    //private String images;
+    private String imageURL;
 
 
-    public Post(String title, String location, Double price, String phone) {
+    public Post(String title, String location, Double price, String phone, String imageURL) {
         this.title = title;
         this.location = location;
         this.price = price;
         this.phone = phone;
+        this.imageURL = imageURL;
     }
 
     public Post(CreatePostRequest request){
@@ -35,6 +36,7 @@ public class Post implements Serializable {
         this.location = request.getLocation();
         this.price = request.getPrice();
         this.phone = request.getPhone();
+        this.imageURL = request.getImageURL();
     }
 
     public Post(EditPostRequest request){
@@ -43,5 +45,6 @@ public class Post implements Serializable {
         this.location = request.getLocation();
         this.price = request.getPrice();
         this.phone = request.getPhone();
+        this.imageURL = request.getImageURL();
     }
 }

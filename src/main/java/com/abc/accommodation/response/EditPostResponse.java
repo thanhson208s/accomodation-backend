@@ -12,6 +12,7 @@ public class EditPostResponse {
     private String location;
     private Double price;
     private String phone;
+    private String imageURL;
 
     public EditPostResponse(Post post) {
         this.id = post.getId();
@@ -19,5 +20,6 @@ public class EditPostResponse {
         this.location = post.getLocation();
         this.price = post.getPrice();
         this.phone = post.getPhone();
+        this.imageURL = post.getImageURL();
     }
 }
