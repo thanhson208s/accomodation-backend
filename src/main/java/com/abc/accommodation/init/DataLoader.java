@@ -37,7 +37,7 @@ public class DataLoader implements CommandLineRunner {
         postRepository.save(post);
         post = new Post("Thuê nhà giá rẻ","Linh Trung,Bình Dương",750000.0,"0983465321","https://amp.thitruong.today/uploads/files/2019/12/28/C-ch-ng-tin-cho-thu-nh-hi-u-qu-2.jpg",user);
 
-        user = new User("phong",passwordEncoder("Phong789"),"0965877543");
+        user = new User("phong",passwordEncoder.encode("Phong789"),"0965877543");
         user = userRepository.save(user);
 
         postRepository.save(post);
@@ -49,7 +49,7 @@ public class DataLoader implements CommandLineRunner {
         postRepository.save(post);
 
 
-        user = new User("Hieu",passwordEncoder("hieu123"),"0965876543");
+        user = new User("Hieu",passwordEncoder.encode("hieu123"),"0965876543");
         user = userRepository.save(user);
 
         post = new Post("Cho thuê nhà","Quận 12",6000000.0,"09934876321","https://cdn.chotot.com/WK-HaDq2E9D6S9mTvcX-R44d2UMwT_HKiQjc7Z5nW1A/preset:listing/plain/28188309c0a910cdf786e9b61e420d69-2670701303606045248.jpg",user);
@@ -61,7 +61,7 @@ public class DataLoader implements CommandLineRunner {
         post = new Post("Cho thuê nhà giá ưu đãi","Quận Hoàn Kiếm",3500000.0,"0997625321","https://phoxanh.vn/server/php/files/2%20(36).png",user);
         postRepository.save(post);
 
-        user = new User("Son",passwordEncoder("Son123"),"0965436543");
+        user = new User("Son",passwordEncoder.encode("Son123"),"0965436543");
         user = userRepository.save(user);
         post = new Post("Cho thuê nhà quận 6","Quận 6, TPHCM",3500000.0,"0993325321","https://image.sggp.org.vn/w580/Uploaded/2020/dureidrkxq/2019_02_24/x8e_ekrf.jpg",user);
         postRepository.save(post);
