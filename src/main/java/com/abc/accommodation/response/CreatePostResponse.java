@@ -14,6 +14,7 @@ public class CreatePostResponse {
     private String phone;
     private String imageURL;
     private String description;
+    private String username;
 
     public CreatePostResponse(Post post) {
         this.id = post.getId();
@@ -23,5 +24,6 @@ public class CreatePostResponse {
         this.phone = post.getPhone();
         this.imageURL = post.getImageURL();
         this.description = post.getDescription();
+        this.username = post.getUser().getUsername();
     }
 }

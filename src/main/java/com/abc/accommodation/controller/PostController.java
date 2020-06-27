@@ -2,7 +2,9 @@ package com.abc.accommodation.controller;
 
 
 import com.abc.accommodation.model.Post;
+import com.abc.accommodation.model.User;
 import com.abc.accommodation.repository.PostRepository;
+import com.abc.accommodation.repository.UserRepository;
 import com.abc.accommodation.request.CreatePostRequest;
 import com.abc.accommodation.request.DeletePostRequest;
 import com.abc.accommodation.request.EditPostRequest;
@@ -27,6 +29,13 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/all")
+    public List<Post> getPosts() {
+        return postRepository.findAll();
+    }
 
     @GetMapping("/")
     public List<Post> getPosts(@AuthenticationPrincipal UserPrincipal userPrincipal) {
@@ -53,10 +62,15 @@ public class PostController {
 
     @PostMapping("/create")
     public ResponseEntity<CreatePostResponse> createPost(@RequestBody CreatePostRequest request, @AuthenticationPrincipal UserPrincipal userPrincipal) throws Exception {
-        Post post = new Post(request);
-        post = postRepository.save(post);
-        CreatePostResponse response = new CreatePostResponse(post);
-        return ResponseEntity.ok(response);
+        Optional<User> user = userRepository.findByUsername(userPrincipal.getUsername());
+        if (user.isPresent()) {
+            Post post = new Post(request);
+            post.setUser(user.get());
+            post = postRepository.save(post);
+            CreatePostResponse response = new CreatePostResponse(post);
+            return ResponseEntity.ok(response);
+        }
+        else return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/edit")

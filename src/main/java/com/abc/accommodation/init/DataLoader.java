@@ -37,7 +37,6 @@ public class DataLoader implements CommandLineRunner {
         postRepository.save(post);
         post = new Post("Thuê nhà giá rẻ","Linh Trung,Bình Dương",750000.0,"0983465321","https://amp.thitruong.today/uploads/files/2019/12/28/C-ch-ng-tin-cho-thu-nh-hi-u-qu-2.jpg",user,"");
 
-
         user = new User("phong",passwordEncoder.encode("phong123"),"0965877543");
         user = userRepository.save(user);
 
