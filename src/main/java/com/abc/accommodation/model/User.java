@@ -29,7 +29,6 @@ public class User {
     public User(String username, String password, String phone){
         this.username = username;
         this.password = password;
-        this.avatar = avatar;
         this.phone = phone;
     }
 
